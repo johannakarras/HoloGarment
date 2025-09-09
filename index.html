@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/glide.core.css">
+    <link rel="stylesheet" href="./static/css/glide.theme.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/styles.css">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/jquery.flip.min.js"></script>
+
+    <script src="./static/js/glide.min.js"></script>
+
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <title>HoloGarment: 360°  Novel View Synthesis of In-the-Wild Garments</title>
+  </head>
+  <body>
+      
+    <section id="title_authors">
+      <div style="padding-top: 50px; padding-bottom: 5px; background-color: rgb(255, 255, 255);">
+        <h1 style="text-align: center; color: rgb(0, 0, 0);">HoloGarment: 360°  Novel View Synthesis of In-the-Wild Garments</h1>
+      </div>
+  
+      <div class="authors" style="background-color: rgb(255, 255, 255); margin-top: -20px; margin-bottom: 0px">
+        <p style="padding-bottom: 15px; color:rgb(0, 0, 0)">
+          <a href="https://johannakarras.github.io/">Johanna Karras</a><sup>1,2</sup>, 
+          <a href="http://www.svcl.ucsd.edu/people/yingwei/">Yingwei Li</a><sup>1</sup>, 
+          <a href="">Yasamin Jafarian</a><sup>1</sup>,
+          <a href="https://www.irakemelmacher.com/">Ira Kemelmacher-Shlizerman</a><sup>1,2</sup>
+        </p>
+        <p class="smaller" style="padding-bottom: 15px; color: rgb(0, 0, 0)"><sup>1</sup>Google Research <sup>2</sup>University of Washington</p>
+        <p style="color: rgb(0, 0, 0)">arxiv 2025</p>
+      </div>
+    </section>
+    <section id="gallery">
+        <div class="main_video">
+            <div class="column" style="text-align: center; padding-left:20%; padding-right: 20%;">
+                <video autoplay controls muted loop style="">
+                    <source src="static/videos/hologarment-intro.mp4" type="video/mp4"/>
+                  </video>
+                <p>Input Person</p>
+            </div>
+        </div>
+    </section>
+
+    <div style="display:block; text-align: center;">
+      <a class="read-paper" target="_blank" href="./static/pdf/hologarment.pdf"><button style="">Research Paper</button></a>
+      <a class="read-paper" target="_blank" href="./static/pdf/hologarment_supplementary.pdf"><button style="">Supplementary</button></a>
+    </div>
+
+    <section id="abstract">
+      <div class="abstract" style="background-color: rgb(255, 255, 255); margin-top: -35px;">
+        <div class="inside">
+          <p class="text" style="color:rgb(0, 0, 0);">
+            Novel view synthesis (NVS) of in-the-wild garments is a challenging task due significant occlusions, complex human poses, and cloth deformations. Prior methods rely on synthetic 3D training data consisting of mostly unoccluded and static objects, leading to poor generalization on real-world clothing. In this paper, we propose HoloGarment (<b style="color: #34A6F4;">Holo</b>gram-<b style="color: #34A6F4;">Garment</b>), a method that takes 1-3 images or a continuous video of a person wearing a garment and generates 360° novel views of the garment in a canonical pose. Our key insight is to bridge the domain gap between real and synthetic data with a novel implicit training paradigm leveraging a combination of large-scale real video data and small-scale synthetic 3D data to optimize a shared garment embedding space. During inference, the shared embedding space further enables construction of a garment “atlas” representation by finetuning a garment embedding on a specific real-world video. The atlas captures garment-specific geometry and texture across all viewpoints, independent of body pose or motion. Extensive experiments show that HoloGarment achieves state-of-the-art performance on NVS of in-the-wild garments from images and videos. Notably, our method robustly handles challenging real-world artifacts -- such as wrinkling, pose variation, and occlusion -- while maintaining photorealism, view consistency, fine texture details, and accurate geometry. 
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="interactive_demo">
+    <div class="content" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0); padding: 0px">
+      <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0)">
+        <h1>Gallery</h1>
+      </div>
+      <!-- Single-View Gallery -->
+      <div class="glide" style="text-align: center; padding:0px;" id="glide_tryon_demo0">
+        <h3 class="subtitle">Single View-to-360°</h3>
+        <div class="glide__track" data-glide-el="track" style='padding:0;'>
+          <ul class="glide__slides" style="">
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px; gap: 0rem;">
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-00ba15aa08a8b62cfe2471d780f67535351789ea28497fc73c059efc02ffcb8e_000.mp4_frame_0.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/00ba15aa08a8b62cfe2471d780f67535351789ea28497fc73c059efc02ffcb8e_000.mp4_frame_0--00ba15aa08a8b62cfe2471d780f67535351789ea28497fc73c059efc02ffcb8e_000.mp4_frame_31.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-915AFYiy5HS.mp4.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/915AFYiy5HS_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px; gap: 0rem;">
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-2b0716084438cc16ca1259d9c1a5b0c9742f20d8e30d475dda74891af4cdec45.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/2b0716084438cc16ca1259d9c1a5b0c9742f20d8e30d475dda74891af4cdec45_000.mp4_frame_130--2b0716084438cc16ca1259d9c1a5b0c9742f20d8e30d475dda74891af4cdec45_000.mp4_frame_161.mp4_pred_crop2.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-117d19500b283a52062aa3945ab25e3e34d78fb75127e1240af05f01529b2502_000.mp4_frame_0--117d19500b283a52062aa3945ab25e3e34d78fb75127e1240af05f01529b2502_000.mp4_frame_31.mp4_c_p_img.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/117d19500b283a52062aa3945ab25e3e34d78fb75127e1240af05f01529b2502_000.mp4_frame_0--117d19500b283a52062aa3945ab25e3e34d78fb75127e1240af05f01529b2502_000.mp4_frame_31.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px; gap: 0rem;">
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-91-NTYmAx2S.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/91-NTYmAx2S.mp4_frame_128--A1wrrhGRZmS.mp4_frame_145.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-91EfnBTEE2S.mp4.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/91EfnBTEE2S.mp4_frame_0--A16GrHceHTS.mp4_frame_138.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px; gap: 0rem;">
+                  <div class="narrowcolumnpair" style="padding-right: 0px; margin-right:0em;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-9461ac338a0fc62c7b608100a19b627349023f7f2ccf7195a2b52fa44bdc9568.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/9461ac338a0fc62c7b608100a19b627349023f7f2ccf7195a2b52fa44bdc9568_000.mp4_frame_0--9461ac338a0fc62c7b608100a19b627349023f7f2ccf7195a2b52fa44bdc9568_000.mp4_frame_31.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                  <div class="narrowcolumnpair" style="padding-right: 0px;">
+                    <div class="narrowcolumn" style="padding-right: 0px;">
+                      <img id="garmentImage_2" src="static/videos/gallery/single/single-424b3947d619b01bf9f9bc3cc598e1f32d30e08509de2004593c5af3812c1833.png"></img>
+                      <p>Single Input Garment</p>
+                    </div>
+                    <div class="narrowcolumn" style="padding-left: 0px;">
+                        <video id="personVideo_4" autoplay controls muted loop>
+                          <source src="static/videos/gallery/single/424b3947d619b01bf9f9bc3cc598e1f32d30e08509de2004593c5af3812c1833_000.mp4_frame_0_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                  </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls" style="margin-top:0%;">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-right:30px; margin-top:-20px;">prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-left:30px; margin-top:-20px;">next</button>
+        </div>
+      </div>
+      <script>
+        new Glide('#glide_tryon_demo0', {
+          type: 'carousel',
+          startAt: 0,
+          perView: 1
+        }).mount();
+      </script>
+      <!-- Multi-View Gallery -->
+      <div class="glide" style="text-align: center; padding:0px;" id="glide_tryon_demo1">
+        <h3 class="subtitle">Sparse Views-to-360°</h3>
+        <div class="glide__track" data-glide-el="track" style='padding:0;'>
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="multicolumn">
+                      <img id="garmentImage_0" src="static/videos/gallery/multi/multi-striped-sweater.png"></img>
+                      <p>Multi-View Input Images</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_0" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/multi/2a2dd586b143afe8692769369d16f2fc1097c25b1160cdc57ae1efe5c9cb540b_000.mp4_frame_0--2a2dd586b143afe8692769369d16f2fc1097c25b1160cdc57ae1efe5c9cb540b_000.mp4_frame_54.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p style="width:390px;">360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="multicolumn">
+                      <img id="garmentImage_1" src="static/videos/gallery/multi/multi-73139b9ee5c7017782f21b14b3528b2d2a0f55ebef35156718c9dd406ec2b3b9.png"></img>
+                      <p>Multi-View Input Images</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_1" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/multi/73139b9ee5c7017782f21b14b3528b2d2a0f55ebef35156718c9dd406ec2b3b9_001.mp4_frame_0--73139b9ee5c7017782f21b14b3528b2d2a0f55ebef35156718c9dd406ec2b3b9_001.mp4_frame_39.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p style="width:390px;">360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="multicolumn">
+                      <img id="garmentImage_1" src="static/videos/gallery/multi/multi-black-romper.png"></img>
+                      <p>Multi-View Input Images</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_1" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/multi/black_romper_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p style="width:390px;">360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="multicolumn">
+                      <img id="garmentImage_1" src="static/videos/gallery/multi/multi-green-shirt.png"></img>
+                      <p>Multi-View Input Images</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_1" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/multi/2cc5429fd17b399b280cc4263b9e5573d635bbafa63b0618dd1b889022442db7_000.mp4_frame_19--2cc5429fd17b399b280cc4263b9e5573d635bbafa63b0618dd1b889022442db7_000.mp4_frame_21.mp4_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p style="width:390px;">360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+          </li>
+            
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls" style="margin-top:0%;">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-right:30px; margin-top:-20px;">prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-left:30px; margin-top:-20px;">next</button>
+        </div>
+      </div>
+      <script>
+        new Glide('#glide_tryon_demo1', {
+          type: 'carousel',
+          startAt: 0,
+          perView: 1
+        }).mount();
+      </script>
+      <!-- Video Gallery -->
+      <div class="glide" style="text-align: center; padding:0px;" id="glide_tryon_demo2">
+        <h3 class="subtitle">Video-to-360°</h3>
+        <div class="glide__track" data-glide-el="track" style='padding:0;'>
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="column">
+                      <video id="garmentVideo_0" width="250" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/video/652b5cd91148c4bd74a0c64ca95633b618e3c09b2b408033210dbb39c4c60819_000-v2.mp4" type="video/mp4"/>
+                        </video>
+                      <p>Input Video</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_2" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/video/652b5cd91148c4bd74a0c64ca95633b618e3c09b2b408033210dbb39c4c60819_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="column">
+                      <video id="garmentVideo_1" width="250" height="200" autoplay controls muted loop>
+                        <source src="static/videos/gallery/video/0b4be6ef3268c2e4b6a205f122017cd853a614cc10cf01aca0948c9a15cacc36_000_v2_crop.mp4" type="video/mp4"/>
+                      </video>
+                      <p>Input Video</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_3" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/video/0b4be6ef3268c2e4b6a205f122017cd853a614cc10cf01aca0948c9a15cacc36.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+            <li class="glide__slide">
+              <div class="tryon_demo">
+                <div class="main" style="padding:0px">
+                    <div class="column">
+                      <video id="garmentVideo_1" width="250" height="200" autoplay controls muted loop>
+                        <source src="static/videos/gallery/video/04afbf34844ca23ee306bb3148535e65a8e5086a28340512bcd81e66bf006732_crop.mp4" type="video/mp4"/>
+                      </video>
+                      <p>Input Video</p>
+                    </div>
+                    <div class="column">
+                        <video id="personVideo_3" width="390" height="200" autoplay controls muted loop>
+                          <source src="static/videos/gallery/video/04afbf34844ca23ee306bb3148535e65a8e5086a28340512bcd81e66bf006732_pred_crop.mp4" type="video/mp4"/>
+                        </video>
+                        <p>360° Novel Views</p>
+                    </div>
+                </div>
+                <script src="./static/js/demo_script.js"></script>
+            </div>
+            </li>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls" style="margin-top:0%;">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-right:30px; margin-top:-20px;">prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="color:rgb(0, 0, 0); border: 2px solid rgba(0, 0, 0, 0.5);margin-left:30px; margin-top:-20px;">next</button>
+        </div>
+      </div>
+      <script>
+        new Glide('#glide_tryon_demo2', {
+          type: 'carousel',
+          startAt: 0,
+          perView: 1
+        }).mount();
+      </script>
+
+    </section>
+
+
+    <section id="method">
+    <div class="content" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0);">
+      <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0)">
+        <h1>Method</h1>
+      </div>
+    </div>
+      <!-- <div class="white">
+        <figure>
+          <img src="./static/images/architecture.svg" style="padding-bottom: 0px; margin-bottom:-30px; padding-left:30px; padding-right:30px;">
+          <figcaption style="background-color: rgb(255, 255, 255); padding-top:60  px;">
+            <p>
+              <b>$\text{Architecture.}$</b> 
+              Given an input garment image $I_g$ and a driving pose sequence $(J_{2D}, J_{3D})$, HoloGarment generates a video of the garment following the driving poses. The VDM operates in two distinct modes -- animation (solid orange line) and 360° novel view synthesis (dotted blue line) -- depending on the input pose sequence. The UNet contains two separate, identical sets of spatial temporal blocks -- one set for task 1 (orange) and one set for task 2 (blue). Only one branch is active at a time and we refer which set of the VDM parameters are active as $\theta_{\text{real}}$ and $\theta_{\text{spin}}$, respectively. All other spatial layers are shared between the two tasks. The noisy input frames $z_t$, input garment $I_g$, and driving 2D pose $J_{2D}$ are encoded by separate UNet encoders into $f_z, f_i, f_{J_{2D}}$, while the garment pose $J_g$ and 3D driving pose sequence $J_{3D}$ are encoded into $f_{J_g}, f_{J_{3D}}$ by a single linear and 4 dense layers, respectively. Garment features $f_{I_g}, f_{J_g}$ are concatenated into $f_g$. Inside of the DiT blocks, the garment features $f_g$ are cross-attended as keys and values with $f_z$, while $f_{j2d}, f_{j3d}$ are concatenated with $f_z$. The final noisy latent features $f_z$ are decoded by a UNet decoder to obtain $z_{t-1}$.
+            </p>
+          </figcaption>
+        </figure>
+      </div> -->
+      <div class="white">
+        <figure>
+          <img src="./static/images/implicit-training.svg" style="padding-bottom: 0px; margin-bottom:-30px; padding-left:30px; padding-right:30px;">
+          <figcaption style="background-color: rgb(255, 255, 255); padding-top:60px;">
+            <p>
+              <b>$\text{Implicit Training Paradigm.}$</b> 
+              Our key insight is an implicit training paradigm, where two or more distinct training tasks indirectly train a model to perform the target task for which ground truth data is not available. Using a combination of real image/video data and synthetic 360° spin renderings of 3D assets, our garment encoder learns a shared garment embedding space between both domains that enables garment animation (task 1) and garment novel view synthesis (task 2). In doing so, we bypass the limitations of synthetic-only 3D datasets to handle challenging real-world garment images and videos.
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="white">
+        <figure>
+          <figcaption style="background-color: rgb(255, 255, 255); padding-top:30px;">
+            <img src="./static/videos/image_360_crop.gif" style="padding-bottom: 0px; margin-bottom:30px; padding-left:200px; padding-right:200px;">
+            <p>
+              <b>$\text{Image-to-360°.}$</b> 
+              Our implicit training approach enables us to train a robust garment embedding space on diverse, large-scale garment video data that is also compatible with the novel view synthesis task. As a result, we can accomplish the desired implicit task of <i>real</i> image-to-360° novel view synthesis. Given a real garment image (task 1) and static spin pose sequence in a canonical A-pose (task 2), HoloGarment generates static 360° novel views of the input garment:
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="white">
+        <figure>
+          <img src="./static/images/atlas_finetuning_and_ablation.svg" style="max-width:1000px">
+          <figcaption style="background-color: rgb(255, 255, 255); padding-top:20px;">
+            <p>
+              <b>$\text{Video-to-360°via Garment Atlas Finetuning.}$</b> 
+              (Left) HoloGarment enables video-to-NVS by finetuning a garment-specific embedding or "atlas", on a real-world video. By utilizing this atlas during inference, HoloGarment generates photorealistic 360° novel views of the garment. (Right) In single-view (top row) and multi-view conditioning (middle row), poorly chosen input views negatively affect the quality of synthesized views. Atlas finetuning on video (bottom row) eliminates the dependency on input view selection by consolidating details from all video frames to improve garment texture details and multi-view consistency.
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+
+    <div class="content" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0);">
+    <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0);">
+      <h1>Method Comparisons</h1>
+    </div>
+    </div>
+    <section id="sota_comparisons"></section>
+      <div class="tryon_demo">
+        <div class="main" style="flex-wrap:nowrap;">
+            <div class="widecolumn" style="text-align: center;">
+                <h3 class="subtitle">Comparisons to SOTA</h3>
+                <video autoplay controls muted loop>
+                  <source src="static/videos/sota_crop.mp4" type="video/mp4"/>
+                </video>
+            </div>
+            <div class="widecolumn" style="text-align: center;">
+              <h3 class="subtitle">Ablation Studies</h3>
+              <video autoplay controls muted loop>
+                <source src="static/videos/ablations_crop.mp4" type="video/mp4"/>
+              </video>
+            </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <section id="limitations">
+    <div class="content" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0);">
+      <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0);">
+        <h1>Limitations</h1>
+      </div>
+    </div>
+      <div class="limitations" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0)">
+        <div class="inside">
+          <p class="text" style="padding: 16px;">
+            While our method improves over existing methods, it faces several limitations. Due to the limited diversity of the synthetic 3D garment dataset, HoloGarment struggles with unusual garment shapes (e.g. assymmetry or cut-outs). Our model also exhibits some bias towards those garment categories which are more abundant in the 3D dataset, such as pants and t-shirts. See the supplementary for qualitative examples. A larger synthetic garment dataset may remedy such issues.  Other future work includes speeding up atlas finetuning (currently ~30 minutes on a single TPU) and increasing resolutiong via super-resolution network.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="limitations">
+    <div class="content" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0);">
+      <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0);">
+        <h1>Bibtex</h1>
+      </div>
+    </div>
+      <div class="limitations" style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0)">
+        <div class="inside">
+          <p class="text" style="padding: 16px; background-color: rgb(250, 250, 250);">
+          @InProceedings{Karras_HoloGarment_2025,<br>
+            &nbsp;&nbsp;author={Karras, Johanna and Li, Yingwei and Jafarian, Yasamin and Kemelmacher-Shlizerman, Ira},<br>
+            &nbsp;&nbsp;title={HoloGarment: 360°  Novel View Synthesis of In-the-Wild Garments},<br>
+            <!--- &nbsp;&nbsp;booktitle = {},<br>-->
+            &nbsp;&nbsp;month = {August},<br>
+            &nbsp;&nbsp;year={2025},<br>
+          }
+        </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bibTex_thanks">
+      <div class="content" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0); margin-top: 25px;">
+        <div style="max-width:1000px; margin-left:auto; margin-right:auto">
+            <!---<h1 style="padding-top:min(5%, 20px);">Acknowledgements</h1>-->
+            <div class="header_dark_gray" style="background-color: rgb(230, 230, 230); color:rgb(0, 0, 0);">
+                <h1>Acknowledgements</h1>
+            </div>
+            <p class="smaller" style="text-align: justify; max-width: 1000px;">
+              This work was done when all authors were at Google.
+              We are grateful for the kind support of the whole Google ARML Commerce organization. 
+            </p>
+        </div>
+        </div>
+    </section>
+
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
